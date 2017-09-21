@@ -1,0 +1,132 @@
+#%RAML 1.0
+title: Group Event REST API
+version: v1
+protocols: [ HTTP ]
+baseUri: http://localhost:3000
+mediaType: application/json
+/events:
+  get:
+    description: List all Events
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              [
+                {
+                  "id": 1,
+                  "title": "First",
+                  "description": "First Event",
+                  "start_date": "2017-09-09T09:33:29.762Z",
+                  "end_date": "2017-09-14T09:33:29.762Z",
+                  "location": "Brazil",
+                  "is_actual": true,
+                  "duration": 5,
+                  "created_at": "2017-09-09T09:33:29.820Z",
+                  "updated_at": "2017-09-09T09:33:29.820Z"
+                }
+              ]
+  post:
+    description: Create a new Event
+    queryParameters:
+      title:
+        description: "Event Title"
+        required: true
+        type: string
+        example: "Title"
+      description:
+        description: "Event Description"
+        required: true
+        type: string
+        example: "Some words about Event"
+      start_date:
+        description: "Event start date"
+        required: true
+        type: string
+        example: "22.12.2017"
+      end_date:
+        description: "Event end date"
+        required: true
+        type: string
+        example: "28.12.2017"
+      location:
+        description: "Event location"
+        required: true
+        type: string
+        example: "Moscow"
+    responses:
+      201:
+        body:
+          application/json:
+            example: |
+              [
+                {
+                  "id": 2,
+                  "title": "Second",
+                  "description": "Second Event",
+                  "start_date": "2017-12-22T09:33:29.762Z",
+                  "end_date": "2017-12-28T09:33:29.762Z",
+                  "location": "Brazil",
+                  "is_actual": true,
+                  "duration": 6,
+                  "created_at": "2017-09-09T09:33:29.820Z",
+                  "updated_at": "2017-09-09T09:33:29.820Z"
+                }
+              ]
+  /{id}:
+    get:
+      description: Get a Event by id
+      responses:
+        200:
+          body:
+            application/json:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "id": 2,
+                  "title": "Second",
+                  "description": "Second Event",
+                  "start_date": "2017-12-22T09:33:29.762Z",
+                  "end_date": "2017-12-28T09:33:29.762Z",
+                  "location": "Brazil",
+                  "is_actual": true,
+                  "duration": 6,
+                  "created_at": "2017-09-09T09:33:29.820Z",
+                  "updated_at": "2017-09-09T09:33:29.820Z"
+                }
+    put:
+      description: Update an event by id
+      queryParameters:
+        title:
+          description: "Event Title"
+          required: false
+          type: string
+          example: "Title"
+        description:
+          description: "Event Description"
+          required: false
+          type: string
+          example: "Some words about Event"
+        start_date:
+          description: "Event start date"
+          required: false
+          type: string
+          example: "22.12.2017"
+        end_date:
+          description: "Event end date"
+          required: false
+          type: string
+          example: "28.12.2017"
+        location:
+          description: "Event location"
+          required: false
+          type: string
+          example: "Moscow"
+      responses:
+        204: 'No content'
+    delete:
+      description: 'Delete a event by id (only set actual false without delete in database)'
+      responses:
+        204: 'No content'

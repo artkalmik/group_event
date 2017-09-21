@@ -1,0 +1,16 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: <%= ENV.fetch('GE_DB_USER') %>
+  password: <%= ENV.fetch('GE_DB_PASSWORD') %>
+  database: <%= ENV.fetch('GE_DB_NAME') %>
+  pool: <%= ENV.fetch('GE_DB_POOL', 5) %>
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
